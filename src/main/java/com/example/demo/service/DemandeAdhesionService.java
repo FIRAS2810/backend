@@ -12,6 +12,7 @@ import com.example.demo.entities.DemandeAdhesion;
 import com.example.demo.entities.EtatDemande;
 import com.example.demo.entities.Fichier;
 import com.example.demo.entities.Personne;
+import com.example.demo.entities.TypeFichier;
 import com.example.demo.repositories.DemandeAdhesionRepository;
 import com.example.demo.repositories.FichierRepository;
 import com.example.demo.repositories.PersonneRepository;
@@ -61,11 +62,22 @@ public class DemandeAdhesionService {
         Fichier fichier = new Fichier();
         fichier.setDemande(demande);
         fichier.setContenu(dto.getFichier().getBytes());
+        fichier.setNomFichier(dto.getFichier().getOriginalFilename());
+
+        // 🟢 Détecter si image ou PDF
+        String contentType = dto.getFichier().getContentType();
+
+        if (contentType != null && contentType.startsWith("image")) {
+            fichier.setTypeFichier(TypeFichier.IMAGE);
+        } else {
+            fichier.setTypeFichier(TypeFichier.PDF);
+        }
 
         fichierRepository.save(fichier);
 
         System.out.println("✅ Demande enregistrée avec succès !");
     }
+
     
     public List<DemandeAdhesion> getAllDemandes() {
         return demandeRepository.findAll();
@@ -74,6 +86,8 @@ public class DemandeAdhesionService {
     public boolean demandeExistePourCin(String cin) {
         return demandeRepository.existsByPersonneCin(cin);
     }
+    
+    
     
     
 
@@ -103,6 +117,9 @@ public class DemandeAdhesionService {
 
         mailService.envoyerMail(demande.getPersonne().getEmail(), sujet, contenu);
     }
+    
+    
+    
 
 
 }

@@ -72,6 +72,10 @@ public class DemandeAdhesionController {
             dto.setEmail(d.getPersonne().getEmail());
             dto.setEtat(d.getEtat().name());
             dto.setDateDemande(d.getDateDemande().toString());
+            dto.setTel(d.getPersonne().getTelephone());
+            dto.setVille(d.getPersonne().getAdresse()); // ou getVille() si séparé
+            dto.setActivite(d.getPersonne().getActivite());
+            dto.setDateDecision(d.getDateAcceptation() != null ? d.getDateAcceptation().toString() : null);
 
             // Récupérer le fichier (le 1er si plusieurs)
             if (d.getJustificatifs() != null && !d.getJustificatifs().isEmpty()) {
@@ -106,5 +110,7 @@ public class DemandeAdhesionController {
         long count = demandeRepository.countByEtat(EtatDemande.EN_ATTENTE);
         return ResponseEntity.ok(count);
     }
+    
+    
 
 }

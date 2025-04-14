@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class DemandeAdhesionRequestDTO {
+	
 
 	private String cin;
     private String nom;
@@ -18,4 +19,6 @@ public class DemandeAdhesionRequestDTO {
 
     // Justificatif (image ou PDF)
     private MultipartFile fichier;
+    private String typeFichier;  
+    private String nomFichier;
 }

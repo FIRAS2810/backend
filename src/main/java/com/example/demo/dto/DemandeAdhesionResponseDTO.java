@@ -12,5 +12,9 @@ public class DemandeAdhesionResponseDTO {
     private String email;
     private String etat;
     private String dateDemande;
+    private String tel;
+    private String ville;
+    private String activite;
+    private String dateDecision;
     private String justificatifBase64;
 }
