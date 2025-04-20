@@ -1,5 +1,7 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,6 +31,11 @@ public class Utulisateur {
 	    private Role role;
 
 	    @OneToOne(mappedBy = "utulisateur")
+	    @JsonIgnore
 	    private Adherent adherent;
+	    
+	    @Enumerated(EnumType.STRING)
+	    @Column(nullable = false)
+	    private StatutCompte statutCompte = StatutCompte.ACTIF;
 
 }

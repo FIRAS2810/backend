@@ -9,6 +9,7 @@ public class DemandeAdhesionResponseDTO {
     private String cinPersonne;
     private String nom;
     private String prenom;
+    private String sexe;
     private String email;
     private String etat;
     private String dateDemande;

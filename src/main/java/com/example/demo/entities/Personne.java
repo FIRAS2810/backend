@@ -23,6 +23,7 @@ public class Personne {
     private String email;
     private String telephone;
     private String adresse;
+    private String sexe;
     private LocalDate dateNaissance;
     private String activite;
     

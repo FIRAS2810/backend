@@ -42,6 +42,7 @@ public class DemandeAdhesionService {
         personne.setCin(dto.getCin());
         personne.setNom(dto.getNom());
         personne.setPrenom(dto.getPrenom());
+        personne.setSexe(dto.getSexe());
         personne.setEmail(dto.getEmail());
         personne.setTelephone(dto.getTelephone());
         personne.setAdresse(dto.getAdresse());

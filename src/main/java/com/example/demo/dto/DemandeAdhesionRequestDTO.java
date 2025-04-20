@@ -11,6 +11,7 @@ public class DemandeAdhesionRequestDTO {
 	private String cin;
     private String nom;
     private String prenom;
+    private String sexe;
     private String email;
     private String telephone;
     private String adresse;
