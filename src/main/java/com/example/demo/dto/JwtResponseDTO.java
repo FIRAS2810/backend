@@ -9,10 +9,13 @@ public class JwtResponseDTO {
     private String role;
     private String email;
     
+    
+    
     public JwtResponseDTO(String token, String role, String email) {
         this.token = token;
         this.role = role;
         this.email = email;
+        
     }
 
 }

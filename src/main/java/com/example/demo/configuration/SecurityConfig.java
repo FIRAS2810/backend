@@ -41,6 +41,7 @@ public class SecurityConfig {
 	                .requestMatchers("/api/cotisations/resume/**").permitAll()
 	                .requestMatchers("/api/parametrage/**").permitAll()
 	                .requestMatchers("/api/cotisations/**").permitAll()
+	                .requestMatchers("/api/transferts/**").permitAll()
 	                .requestMatchers("/api/adherent/**").hasRole("ADHERENT")
 	                .requestMatchers("/api/description/**").permitAll()
 	                .anyRequest().authenticated()

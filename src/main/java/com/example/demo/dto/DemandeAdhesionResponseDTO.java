@@ -18,4 +18,5 @@ public class DemandeAdhesionResponseDTO {
     private String activite;
     private String dateDecision;
     private String justificatifBase64;
+    private String typeFichier;
 }

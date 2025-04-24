@@ -11,7 +11,9 @@ public class Parametrage {
 	@Id
     private Long id = 1L; 
 
-    private double montantMinimalAdhesion = 30.0; 
-    private double valeurAction = 5.0;
+    private double montantMinimalAdhesion ; 
+    private double valeurAction ;
+    
+    private int nbActionsMinimales;
 
 }

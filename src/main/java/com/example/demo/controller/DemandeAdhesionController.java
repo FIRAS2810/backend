@@ -59,7 +59,7 @@ public class DemandeAdhesionController {
         return ResponseEntity.ok(demandeService.getAllDemandes());
     }*/
     
-    @GetMapping("/toutes")
+    /*@GetMapping("/toutes")
     public List<DemandeAdhesionResponseDTO> getAllDemandesAsDTOs() {
         List<DemandeAdhesion> demandes = demandeRepository.findAll();
 
@@ -87,6 +87,16 @@ public class DemandeAdhesionController {
             return dto;
         }).toList();
     }
+    
+    
+    
+   */
+
+    @GetMapping("/toutes")
+    public List<DemandeAdhesionResponseDTO> getToutesDemandes() {
+        return demandeAdhesionService.getAllDemandes();
+    }
+
 
 
     // 🔍 2. Vérifier si une personne a déjà une demande

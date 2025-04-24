@@ -9,4 +9,6 @@ import com.example.demo.entities.Cotisation;
 public interface CotisationRepository extends JpaRepository<Cotisation,Long> {
 
 	List<Cotisation> findByAdherentCin(String cin);
+	
+	
 }

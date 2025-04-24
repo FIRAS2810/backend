@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.BilanCotisationDTO;
 import com.example.demo.entities.Cotisation;
 import com.example.demo.entities.CotisationSummaryDTO;
+import com.example.demo.repositories.AdherentRepository;
 import com.example.demo.service.CotisationService;
 
 @RestController
@@ -23,6 +24,9 @@ public class CotisationController {
 	
 	@Autowired
     private CotisationService cotisationService;
+	
+	@Autowired
+	private AdherentRepository adherentRepository;
 
 	@PostMapping("/ajouter/{cin}")
     public Cotisation ajouterCotisation(
@@ -61,6 +65,14 @@ public class CotisationController {
     public BilanCotisationDTO getEtatFinancierAdherent(@PathVariable String cin) {
         return cotisationService.getEtatCotisationParAdherent(cin);
     }
+    
+    @GetMapping("/par-email/{email}")
+    public List<Cotisation> getCotisationsByEmail(@PathVariable String email) {
+        return adherentRepository.findAdherentByEmail(email)
+            .map(adherent -> cotisationService.getCotisationsByAdherent(adherent.getCin()))
+            .orElseThrow(() -> new RuntimeException("Adhérent non trouvé avec cet email"));
+    }
+
 
 
 }

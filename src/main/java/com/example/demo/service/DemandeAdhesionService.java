@@ -2,12 +2,15 @@ package com.example.demo.service;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.DemandeAdhesionRequestDTO;
+import com.example.demo.dto.DemandeAdhesionResponseDTO;
 import com.example.demo.entities.DemandeAdhesion;
 import com.example.demo.entities.EtatDemande;
 import com.example.demo.entities.Fichier;
@@ -80,10 +83,40 @@ public class DemandeAdhesionService {
     }
 
     
-    public List<DemandeAdhesion> getAllDemandes() {
-        return demandeRepository.findAll();
+    public List<DemandeAdhesionResponseDTO> getAllDemandes() {
+        return demandeRepository.findAll()
+                .stream()
+                .map(demande -> {
+                    DemandeAdhesionResponseDTO dto = new DemandeAdhesionResponseDTO();
+                    dto.setId(demande.getId());
+                    dto.setCinPersonne(demande.getPersonne().getCin());
+                    dto.setNom(demande.getPersonne().getNom());
+                    dto.setPrenom(demande.getPersonne().getPrenom());
+                    dto.setSexe(demande.getPersonne().getSexe());
+                    dto.setEmail(demande.getPersonne().getEmail());
+                    dto.setTel(demande.getPersonne().getTelephone());
+                    dto.setVille(demande.getPersonne().getAdresse());
+                    dto.setActivite(demande.getPersonne().getActivite());
+                    dto.setEtat(demande.getEtat().toString());
+                    dto.setDateDemande(String.valueOf(demande.getDateDemande()));
+
+                    if (demande.getDateAcceptation() != null) {
+                        dto.setDateDecision(String.valueOf(demande.getDateAcceptation()));
+                    }
+
+                    // 🔁 Justificatif : base64 + type
+                    if (demande.getJustificatifs() != null && !demande.getJustificatifs().isEmpty()) {
+                        byte[] contenu = demande.getJustificatifs().get(0).getContenu();
+                        String base64 = Base64.getEncoder().encodeToString(contenu);
+                        dto.setJustificatifBase64(base64);
+                        dto.setTypeFichier(demande.getJustificatifs().get(0).getTypeFichier().name());
+                    }
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
-    
+
     public boolean demandeExistePourCin(String cin) {
         return demandeRepository.existsByPersonneCin(cin);
     }

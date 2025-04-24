@@ -6,4 +6,6 @@ import com.example.demo.entities.Fichier;
 
 public interface FichierRepository extends JpaRepository<Fichier, Long> {
 
+	Fichier findByDemandeId(Long demandeId);
+
 }
