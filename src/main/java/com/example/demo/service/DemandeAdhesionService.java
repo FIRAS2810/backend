@@ -35,6 +35,9 @@ public class DemandeAdhesionService {
     private FichierRepository fichierRepository;
     
     @Autowired
+    private DemandeAdhesionRepository demandeAdhesionRepository;
+    
+    @Autowired
     private MailService mailService;
 
     @Transactional
@@ -153,7 +156,22 @@ public class DemandeAdhesionService {
     }
     
     
-    
+    public long getNombreTotalDemandes() {
+        return demandeAdhesionRepository.count();
+    }
+
+
+    public long getNombreDemandesValidees() {
+        return demandeAdhesionRepository.countByEtat(EtatDemande.ACCEPTEE);
+    }
+
+    public long getNombreDemandesRefusees() {
+        return demandeAdhesionRepository.countByEtat(EtatDemande.REFUSEE);
+    }
+
+    public long getNombreDemandesEnAttente() {
+        return demandeAdhesionRepository.countByEtat(EtatDemande.EN_ATTENTE);
+    }
 
 
 }

@@ -33,12 +33,17 @@ public class TransfertAction {
     private Adherent acheteur;
 
     private int nombreActions;
+    
+    private double valeurUnitaireTransfert; // 🆕 snapshot de la valeur au moment du transfert
+
 
     private LocalDateTime dateTransfert;
     
     @Enumerated(EnumType.STRING)
     private StatutTransfert statut; // EN_ATTENTE, VALIDE, REFUSE
 
+    @Enumerated(EnumType.STRING)
+    private StatutVendeur statutVendeur;
 
     private String commentaire;
 }

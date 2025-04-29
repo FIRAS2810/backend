@@ -18,5 +18,10 @@ public class TransfertActionResponseDTO {
     private String statut;
     private String vendeurNom;
     private String acheteurNom;
+    private String cinAcheteur;
+    private String cinVendeur;
+    private String statutVendeur;
+
+
     
 }

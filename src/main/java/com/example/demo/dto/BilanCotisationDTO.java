@@ -11,7 +11,14 @@ public class BilanCotisationDTO {
 
 	private double montantTotalVerse;
     private int nombreTotalActions;
-    private double montantRestant;             // Ce qu'il reste pour atteindre le montant minimal
-    private boolean adhesionComplete;          // true si >= montant minimal
+    private int nombreActionsCotisees;
+    private int nombreActionsRecues;
+    private int nombreActionsVendues;
+    private double montantRestant;
+    private boolean adhesionComplete;
     private LocalDate dateDernierVersement;
+    private double montantTransfertsEstime;
+    private double montantTotalEstime;
+    private double soldeDisponible; // 💡 Valeur actuelle en DT (actions actuelles × valeur action)
+
 }

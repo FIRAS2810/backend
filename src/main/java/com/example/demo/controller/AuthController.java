@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.JwtResponseDTO;
 import com.example.demo.dto.LoginRequestDTO;
+import com.example.demo.entities.StatutCompte;
 import com.example.demo.entities.Utulisateur;
 import com.example.demo.repositories.UtulisateurRepository;
 import com.example.demo.utils.JwtUtil;
@@ -49,6 +50,10 @@ public class AuthController {
 
         Utulisateur utilisateur = utilisateurRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new Exception("Utilisateur non trouvé"));
+        
+        if (utilisateur.getStatutCompte() == StatutCompte.INACTIF) {
+            throw new Exception("Votre compte a été désactivé. Veuillez contacter l'administration.");
+        }
 
         String token = jwtUtil.generateToken(
                 utilisateur.getEmail(),

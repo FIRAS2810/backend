@@ -10,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entities.Adherent;
 import com.example.demo.entities.EtatDemande;
+import com.example.demo.entities.Parametrage;
 import com.example.demo.entities.Personne;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.Utulisateur;
 import com.example.demo.repositories.AdherentRepository;
+import com.example.demo.repositories.ParametrageRepository;
 import com.example.demo.repositories.PersonneRepository;
 import com.example.demo.repositories.UtulisateurRepository;
 
@@ -37,6 +39,9 @@ public class RegisterService {
 	    
 	    @PersistenceContext
 	    private EntityManager entityManager;
+	    
+	    @Autowired
+	    private ParametrageRepository parametrageRepository;
 
 	    public boolean verifierCINPourInscription(String cin) {
 	        // 1. Vérifie si la personne existe
@@ -94,6 +99,11 @@ public class RegisterService {
 	        adherent.setPersonne(attachedPersonne);
 	        adherent.setDateInscription(LocalDate.now());
 	        adherent.setUtulisateur(utilisateur);
+	        double montantMinimal = parametrageRepository.findById(1L)
+                    .map(Parametrage::getMontantMinimalAdhesion)
+                    .orElse(30.0); // Valeur par défaut si jamais la ligne n'existe pas
+
+adherent.setMontantMinimalAdhesion(montantMinimal);
 
 	        adherentRepository.save(adherent);
 	    }

@@ -26,6 +26,7 @@ public class JwtUtil {
                 .compact();
     }
 
+    
 
     // Extraire l'email (subject)
     public String extractEmail(String token) {

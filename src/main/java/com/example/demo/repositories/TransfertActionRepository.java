@@ -10,4 +10,5 @@ public interface TransfertActionRepository extends JpaRepository<TransfertAction
 
 	List<TransfertAction> findByVendeurCinOrAcheteurCin(String vendeurCin, String acheteurCin);
 
+	List<TransfertAction> findByAcheteurCin(String cin);
 }

@@ -98,7 +98,10 @@ public class TransfertActionController {
                         t.getDateTransfert(),
                         t.getStatut().toString(),
                         t.getVendeur().getPersonne().getNom() + " " + t.getVendeur().getPersonne().getPrenom(),
-                        t.getAcheteur().getPersonne().getNom() + " " + t.getAcheteur().getPersonne().getPrenom()
+                        t.getAcheteur().getPersonne().getNom() + " " + t.getAcheteur().getPersonne().getPrenom(),
+                        t.getAcheteur().getCin(),
+                        t.getVendeur().getCin(),
+                        t.getStatutVendeur().name() 
                 ))
                 .collect(Collectors.toList());
 
@@ -107,6 +110,20 @@ public class TransfertActionController {
 
     
 
+    @PatchMapping("/{id}/accepter-par-vendeur")
+    public void accepterParVendeur(@PathVariable Long id) {
+        transfertService.accepterParVendeur(id);
+    }
+
+    @PatchMapping("/{id}/refuser-par-vendeur")
+    public void refuserParVendeur(@PathVariable Long id) {
+        transfertService.refuserParVendeur(id);
+    }
+
+    @GetMapping("/admin/tous")
+    public List<TransfertActionResponseDTO> getTousPourAdmin() {
+        return transfertService.getTousPourAdmin();
+    }
 
 
 

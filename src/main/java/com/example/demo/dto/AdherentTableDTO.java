@@ -18,4 +18,8 @@ public class AdherentTableDTO {
     private double montant;
     private int nbActions;
     private String photoProfilBase64;
+    private int nombreActionsCotisees;
+    private int nombreActionsRecues;
+    private int nombreActionsVendues;
+
 }

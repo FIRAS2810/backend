@@ -33,6 +33,17 @@ public class Adherent {
 
     @Enumerated(EnumType.STRING)
     private StatutAdherent statut = StatutAdherent.VIVANT;
+    
+    private int nombreActionsRecues; 
+
+    private int nombreActionsAchetees;
+    
+    private int nombreActionsVendues;
+
+    private double montantMinimalAdhesion;
+
+    private LocalDate dateExclusionTemporaire; // 🆕
+
 
     @OneToOne
     @JoinColumn(name = "utilisateur_id")
