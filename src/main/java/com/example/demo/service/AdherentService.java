@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -291,6 +292,36 @@ public class AdherentService {
 	}
 
 	
+
+	public long getTrancheAgeMoins30() {
+	    return adherentRepository.findAll().stream()
+	        .filter(a -> a.getPersonne() != null)
+	        .filter(a -> {
+	            int age = Period.between(a.getPersonne().getDateNaissance(), LocalDate.now()).getYears();
+	            return age < 30;
+	        })
+	        .count();
+	}
+
+	public long getTrancheAge30a50() {
+	    return adherentRepository.findAll().stream()
+	        .filter(a -> a.getPersonne() != null)
+	        .filter(a -> {
+	            int age = Period.between(a.getPersonne().getDateNaissance(), LocalDate.now()).getYears();
+	            return age >= 30 && age <= 50;
+	        })
+	        .count();
+	}
+
+	public long getTrancheAgePlus50() {
+	    return adherentRepository.findAll().stream()
+	        .filter(a -> a.getPersonne() != null)
+	        .filter(a -> {
+	            int age = Period.between(a.getPersonne().getDateNaissance(), LocalDate.now()).getYears();
+	            return age > 50;
+	        })
+	        .count();
+	}
 
 	
 }

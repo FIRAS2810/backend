@@ -38,6 +38,11 @@ public class DashboardService {
 	        dto.setPrevisionCA(moyenneMensuelle * 12);
 	        double caActuel = cotisationService.getChiffreAffairesDuMois(LocalDate.now());
 	        double caPrecedent = cotisationService.getChiffreAffairesDuMois(LocalDate.now().minusMonths(1));
+	        System.out.println("CA actuel : " + caActuel);
+	        System.out.println("CA précédent : " + caPrecedent);
+	        dto.setCaActuel(caActuel);
+	        dto.setCaPrecedent(caPrecedent);
+
 
 	        double croissancePourcent = 0;
 	        if (caPrecedent > 0) {
@@ -52,9 +57,10 @@ public class DashboardService {
 	        dto.setNbDemandesValidees(demandeService.getNombreDemandesValidees());
 	        dto.setNbDemandesRefusees(demandeService.getNombreDemandesRefusees());
 	        dto.setNbDemandesEnAttente(demandeService.getNombreDemandesEnAttente());
-	        dto.setNbMoins30(personneService.getTrancheAgeMoins30());
-	        dto.setNbEntre30et50(personneService.getTrancheAge30a50());
-	        dto.setNbPlus50(personneService.getTrancheAgePlus50());
+	        dto.setNbMoins30(adherentService.getTrancheAgeMoins30());
+	        dto.setNbEntre30et50(adherentService.getTrancheAge30a50());
+	        dto.setNbPlus50(adherentService.getTrancheAgePlus50());
+
 
 	        return dto;
 	    }

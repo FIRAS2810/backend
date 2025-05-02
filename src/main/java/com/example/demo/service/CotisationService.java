@@ -39,6 +39,11 @@ public class CotisationService {
                 .orElseThrow(() -> new RuntimeException("Adhérent non trouvé"));
 
         Parametrage params = parametrageService.getParametrage();
+        
+        if (adherent.getMontantMinimalAdhesion() == 0) {
+            adherent.setMontantMinimalAdhesion(params.getMontantMinimalAdhesion());
+            adherentRepository.save(adherent); // important !
+        }
 
         Cotisation cotisation = new Cotisation();
         cotisation.setAdherent(adherent);
@@ -130,10 +135,8 @@ public class CotisationService {
                 .orElse(null);
 
         // 📏 Montant minimal requis
-        double montantMinimal = cotisations.stream()
-                .mapToDouble(Cotisation::getMontantMinimalSnapshot)
-                .max()
-                .orElse(parametrageService.getParametrage().getMontantMinimalAdhesion());
+        double montantMinimal = adherent.getMontantMinimalAdhesion();
+
 
         boolean estComplete = total >= montantMinimal;
         double montantRestant = calculerMontantRestant(adherent);

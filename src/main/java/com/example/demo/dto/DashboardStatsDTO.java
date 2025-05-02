@@ -19,11 +19,13 @@ public class DashboardStatsDTO {
     private long nbDemandesValidees;
     private long nbDemandesRefusees;
     private long nbDemandesEnAttente;
-
+    
     private double croissancePourcent;
     private double previsionCA;
     private int nombreActionsTransferees;
     private int nombreActionsVendues;
+    private double caActuel;
+    private double caPrecedent;
 
 
 }
